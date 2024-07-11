@@ -1,0 +1,37 @@
+:root {
+    --black-secondary: #3A3A3A;
+    --gray-primary: #F2F2F2;
+    --basic-bg: #fcfbfd;
+    --red-alert: #C92519;
+}
+
+//FONT
+@font-face {
+    font-family: 'Hind-Bold';
+    src: local('Hind-Bold'),
+        url('./font/Hind/Hind-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Hind-Light';
+    src: local('Hind-Light'),
+        url('./font/Hind/Hind-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Hind-Medium';
+    src: local('Hind-Medium'),
+        url('./font/Hind/Hind-Medium.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Hind-Regular';
+    src: local('Hind-Regular'),
+        url('./font/Hind/Hind-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Hind-SemiBold';
+    src: local('Hind-SemiBold'),
+        url('./font/Hind/Hind-SemiBold.ttf') format('truetype');
+}
