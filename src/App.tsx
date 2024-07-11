@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import './global-variable.scss';
 // import Home from './pages/Home/Home';
 // import About from './pages/Home/About/About';
 import Login from './pages/Login/Login';
