@@ -40,21 +40,15 @@ export default function Login() {
                     <img src={logo} alt="logo" className="middle_logo" />
                     <h3>{import.meta.env.VITE_REACT_APP_WELCOME_MESSAGE}</h3>
                 </div>
-                {
-                    !emailSign &&
-                    <>
-                        <Xbutton width="25rem" text="Log in with Google" startIcon={<FcIcons.FcGoogle />} outlined={true} onClick={() => {}} />
-                        <DividerOr />
-                    </>
-                }
+                <Xbutton width="25rem" text="Log in with Google" startIcon={<FcIcons.FcGoogle />} outlined={true} onClick={() => {}} />
+                <DividerOr />
                 <InputField width='25rem' type='text' onChange={(e) => {emailSignup(e.target.value)}} label="Email" />
                 {emailSign && <InputField label="Password" type="password" width='25rem' onChange={() => {}}/>}
 
                 <Xbutton text="Log in" outlined={false} width="25rem" onClick={loginSubmit} startIcon={<></>} />
-                {
-                    !emailSign &&
-                    <Xbutton width="25rem" text='First time here. Create an account' startIcon={<></>} outlined={true} onClick={() => {navigate('/signup')}} />
-                }
+                <Xbutton width="25rem" text='First time here. Create an account' startIcon={<></>} outlined={true} onClick={() => {navigate('/signup')}} />
+                
+                <p style={{color: '#828282'}}>Forgot your password ? <Link to="/forgot-password" style={{fontWeight: 'bold', color: '#0077cc'}}>Click here</Link> </p>
                 <ToastContainer />
             </div>
         </div>

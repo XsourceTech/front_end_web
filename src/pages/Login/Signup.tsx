@@ -41,23 +41,15 @@ export default function Login() {
                     <img src={logo} alt="logo" className="middle_logo" />
                     <h3>{import.meta.env.VITE_REACT_APP_WELCOME_MESSAGE}</h3>
                 </div>
-                {
-                    !emailSign &&
-                    <>
-                        <Xbutton width="25rem" text="Sign up with Google" startIcon={<FcIcons.FcGoogle />} outlined={true} onClick={() => {}} />
-                        <DividerOr />
-                    </>
-                }
+                <Xbutton width="25rem" text="Sign up with Google" startIcon={<FcIcons.FcGoogle />} outlined={true} onClick={() => {}} />
+                <DividerOr />
 
                 <InputField width='25rem' type='text' onChange={(e) => {emailSignup(e.target.value)}} label="Email" />
                 {emailSign && <InputField label="Password" type="password" width='25rem' onChange={() => {}}/>}
                 {emailSign && <InputField label="Username" type="text" width='25rem' onChange={() => {}}/>}
 
                 <Xbutton text="Continue" outlined={false} width="25rem" onClick={loginSubmit} startIcon={<></>} />
-                {
-                    !emailSign &&
-                    <Xbutton width="25rem" text='Already have account. Log in here' startIcon={<></>} outlined={true} onClick={() => {{navigate('/login')}}} />
-                }
+                <Xbutton width="25rem" text='Already have account. Log in here' startIcon={<></>} outlined={true} onClick={() => {{navigate('/login')}}} />
                 <ToastContainer />
             </div>
         </div>
