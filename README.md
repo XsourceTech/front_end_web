@@ -63,3 +63,16 @@ Vite uses `.env` files for environment variables. You can create the following f
 
 * **.env** : Default environment variables. (you can find the .env example file from .env-dist)
 
+## Message Format
+Ensure the frontend only includes the status and response message in the format below:
+```json
+{
+  "status": 200,
+  "response": "text or dict"
+}
+```
+**Notes:**
+The format above is ideal for consistency in API responses.
+Only the status and response fields are necessary at this time.
+
+
