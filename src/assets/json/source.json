@@ -1,0 +1,29 @@
+{
+    "sources": [
+        [{
+            "id": 1,
+            "value": "xhs",
+            "text": "小红书"
+        },
+        {
+            "id": 2,
+            "value": "wechat",
+            "text": "微信公众号"
+        },
+        {
+            "id": 3,
+            "value": "website",
+            "text": "官网"
+        },
+        {
+            "id": 4,
+            "value": "friends",
+            "text": "朋友推荐"
+        },
+        {
+            "id": 5,
+            "value": "others",
+            "text": "其他"
+        }]
+    ]
+}

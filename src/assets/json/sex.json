@@ -1,0 +1,19 @@
+{
+    "sex": [
+        [{
+            "id": 1,
+            "value": "female",
+            "text": "女"
+        },
+        {
+            "id": 2,
+            "value": "male",
+            "text": "男"
+        },
+        {
+            "id": 3,
+            "value": "others",
+            "text": "其他"
+        }]
+    ]
+}
