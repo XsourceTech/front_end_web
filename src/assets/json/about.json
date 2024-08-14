@@ -1,0 +1,19 @@
+{
+    "about": [
+        [{
+            "id": 1,
+            "title": "Accuracy",
+            "des": "X-Source AI provides unparalleled accuracy in data analysis, ensuring you get the most reliable information."
+        },
+        {
+            "id": 2,
+            "title": "Reliability",
+            "des": "Count on X-Source AI for consistent and dependable results every time."
+        },
+        {
+            "id": 3,
+            "title": "Customization",
+            "des": "Our solutions are tailored to meet your unique business needs and challenges."
+        }]
+    ]
+}
