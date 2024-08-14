@@ -1,0 +1,38 @@
+name: Build
+
+inputs:
+  ENVIRONMENT:
+    type: string
+    required: true
+
+runs:
+  using: 'composite'
+
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+        cache: npm
+
+    - name: Node install dependencies
+      shell: bash
+      run: |
+        npm install
+        npm run build -- --mode ${{ inputs.ENVIRONMENT }}
+
+    - name: Static webapp config
+      shell: bash
+      run: |
+        mv ./staticwebapp.config.${{ inputs.ENVIRONMENT }}.json ./dist/staticwebapp.config.json
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: dist/
+        if-no-files-found: error
+
