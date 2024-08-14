@@ -1,0 +1,79 @@
+{
+    "jobs": [
+        [{
+            "id": 1,
+            "value": "undergraduate_china",
+            "text": "国内本科生"
+        },
+        {
+            "id": 2,
+            "value": "master_china",
+            "text": "国内研究生"
+        },
+        {
+            "id": 3,
+            "value": "international_student",
+            "text": "留学生"
+        },
+        {
+            "id": 4,
+            "value": "researcher_school",
+            "text": "高校科研人员"
+        },
+        {
+            "id": 5,
+            "value": "content_producer",
+            "text": "内容创作者"
+        },
+        {
+            "id": 6,
+            "value": "professor",
+            "text": "教育工作者"
+        },
+        {
+            "id": 7,
+            "value": "publishing",
+            "text": "出版业专业人士"
+        },
+        {
+            "id": 8,
+            "value": "medical",
+            "text": "医疗专业人士"
+        },
+        {
+            "id": 9,
+            "value": "enginner_technologist",
+            "text": "工程师和技术专家"
+        },
+        {
+            "id": 10,
+            "value": "social_science",
+            "text": "社会科学工作者"
+        },
+        {
+            "id": 11,
+            "value": "business_management",
+            "text": "商业和管理专业人士"
+        },
+        {
+            "id": 12,
+            "value": "policymaker",
+            "text": "政策制定者及智库工作人员"
+        },
+        {
+            "id": 13,
+            "value": "law",
+            "text": "法律专业人士"
+        },
+        {
+            "id": 14,
+            "value": "non_profit_organization",
+            "text": "非营利组织工作者"
+        },
+        {
+            "id": 15,
+            "value": "others",
+            "text": "其他"
+        }]
+    ]
+}

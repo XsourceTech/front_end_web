@@ -1,9 +1,17 @@
 p {
-    font-family: "Hind-Regular";
+    font-family: "dong-qing";
     font-size: 14px;
     margin: 0;
     padding: 0;
+    color: var(--black-secondary)
 }
+
+h1, h2, h4{
+    font-family: "dong-qing";
+    // font-size: 14px;
+    color: var(--black-secondary)
+}
+
 
 .middle_{
     &horizontal {

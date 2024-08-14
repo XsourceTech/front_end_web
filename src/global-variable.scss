@@ -3,9 +3,15 @@
     --gray-primary: #F2F2F2;
     --basic-bg: #fcfbfd;
     --red-alert: #C92519;
+    --grey-blue: #597EC5;
 }
 
 //FONT
+@font-face {
+    font-family: 'dong-qing';
+    src: local('dong-qing'),
+        url('./font/DongQingHeiTi.otf') format('truetype');
+}
 @font-face {
     font-family: 'Hind-Bold';
     src: local('Hind-Bold'),
