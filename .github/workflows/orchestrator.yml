@@ -54,5 +54,4 @@ jobs:
         uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ secrets.WEB_APP_NAME }}
-          slot-name: 'integration'
           images: ${{ secrets.ACR_LOGIN_SERVER }}/front_end_web:${{ secrets.IMAGE_TAG }}
