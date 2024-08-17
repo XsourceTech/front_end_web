@@ -6,9 +6,11 @@ on:
       - feat/devops_front
 
 jobs:
-  login-azure:
+  build:
+    name: Build and Push to ACR
     runs-on: ubuntu-latest
-    environment: integration
+    environment: Integration
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,21 +22,11 @@ jobs:
 
       - name: Log in to Azure Container Registry
         run: |
-          az acr login --name ${{ secrets.ACR_NAME }}
-          
-  build:
-    name: Build and Push to ACR
-    runs-on: ubuntu-latest
-    environment: integration
-    needs: login-azure
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+          az acr login --name acrixtech 
 
       - name: Build and Push to ACR
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ secrets.ACR_LOGIN_SERVER }}/frontend_end_web:${{ secrets.IMAGE_TAG }}
+          tags: ${{ secrets.ACR_LOGIN_SERVER }}/frontend_end_web:latest
           file: Dockerfile
