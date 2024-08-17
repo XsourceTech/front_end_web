@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import logo from '../../assets/logo.png';
 import './connection.scss';
@@ -9,7 +8,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import config from '../../config';
 
 export default function Reset() {
-    const navigate = useNavigate();
     const [token, setToken] = useState<string>('');
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
