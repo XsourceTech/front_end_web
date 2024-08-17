@@ -9,25 +9,18 @@ jobs:
   login-azure:
     runs-on: ubuntu-latest
     environment: integration
-    env:
-      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
     steps:
-      # Check out repository onto runner
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Login to Azure
       - name: Authenticate to Azure
         run: |
           az login --service-principal -u ${{ secrets.ARM_CLIENT_ID }} -p ${{ secrets.ARM_CLIENT_SECRET }} --tenant ${{ secrets.ARM_TENANT_ID }} --output none
           az account set --subscription ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
-      # Login to acr  
       - name: Log in to Azure Container Registry
-        run: az acr login --name ${{ secrets.ACR_LOGIN_SERVER }}          
+        run: |
+          az acr login --name ${{ secrets.ACR_NAME }}
           
   build:
     name: Build and Push to ACR
@@ -35,24 +28,13 @@ jobs:
     environment: integration
     needs: login-azure
 
-    defaults:
-      run:
-        shell: bash
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Docker Login
-        uses: azure/docker-login@v2
-        with:
-          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
-          username: ${{ secrets.ACR_USERNAME }}
-          password: ${{ secrets.ACR_PASSWORD }}
 
       - name: Build and Push to ACR
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ secrets.IMAGE_TAG }}
+          tags: ${{ secrets.ACR_LOGIN_SERVER }}/frontend_end_web:${{ secrets.IMAGE_TAG }}
           file: Dockerfile
