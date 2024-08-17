@@ -6,6 +6,29 @@ on:
       - feat/devops_front
 
 jobs:
+  login-azure:
+    runs-on: ubuntu-latest
+    environment: integration
+    env:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+    steps:
+      # Check out repository onto runner
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Login to Azure
+      - name: Authenticate to Azure
+        run: |
+          az login --service-principal -u ${{ secrets.ARM_CLIENT_ID }} -p ${{ secrets.ARM_CLIENT_SECRET }} --tenant ${{ secrets.ARM_TENANT_ID }} --output none
+          az account set --subscription ${{ secrets.ARM_SUBSCRIPTION_ID }}
+
+      # Login to acr  
+      - name: Log in to Azure Container Registry
+        run: az acr login --name ${{ secrets.ACR_LOGIN_SERVER }}          
+          
   build:
     name: Build and Push to ACR
     runs-on: ubuntu-latest
@@ -22,7 +45,7 @@ jobs:
       - name: Docker Login
         uses: azure/docker-login@v2
         with:
-          login-server: ${{ secrets.AZURE_URL }}
+          login-server: ${{ secrets.ACR_LOGIN_SERVER }}
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
