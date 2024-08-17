@@ -28,5 +28,5 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: ${{ secrets.ACR_LOGIN_SERVER }}/frontend_end_web:${{ secrets.IMAGE_TAG }} 
+          tags: ${{ secrets.ACR_LOGIN_SERVER }}/front_end_web:${{ secrets.IMAGE_TAG }} 
           file: Dockerfile
