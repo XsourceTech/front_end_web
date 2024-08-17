@@ -6,8 +6,8 @@ on:
       - feat/devops_front
 
 jobs:
-  build:
-    name: Build and Push to ACR
+  build-and-push:
+    name: Build Docker Image and Push to ACR
     runs-on: ubuntu-latest
     environment: Integration
 
@@ -24,9 +24,26 @@ jobs:
         run: |
           az acr login --name ${{ secrets.ACR_NAME }} 
 
-      - name: Build and Push to ACR
+      - name: Build and Push Docker Image to ACR
         uses: docker/build-push-action@v4
         with:
           push: true
           tags: ${{ secrets.ACR_LOGIN_SERVER }}/front_end_web:${{ secrets.IMAGE_TAG }} 
           file: Dockerfile
+
+  deploy-to-azure:
+    name: Deploy to Azure Web App
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    environment: Integration
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Azure Web App Deploy
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ secrets.WEB_APP_NAME }}
+          slot-name: 'integration'
+          images: ${{ secrets.ACR_LOGIN_SERVER }}/front_end_web:${{ secrets.IMAGE_TAG }}
