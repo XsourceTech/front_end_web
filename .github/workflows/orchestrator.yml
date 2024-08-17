@@ -41,6 +41,15 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Authenticate to Azure
+        run: |
+          az login --service-principal -u ${{ secrets.ARM_CLIENT_ID }} -p ${{ secrets.ARM_CLIENT_SECRET }} --tenant ${{ secrets.ARM_TENANT_ID }} --output none
+          az account set --subscription ${{ secrets.ARM_SUBSCRIPTION_ID }}
+
+      - name: Log in to Azure Container Registry
+        run: |
+          az acr login --name ${{ secrets.ACR_NAME }} 
+
       - name: Azure Web App Deploy
         uses: azure/webapps-deploy@v3
         with:
