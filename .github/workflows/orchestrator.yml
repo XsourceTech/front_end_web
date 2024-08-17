@@ -33,6 +33,7 @@ jobs:
     name: Build and Push to ACR
     runs-on: ubuntu-latest
     environment: integration
+    needs: login-azure
 
     defaults:
       run:
