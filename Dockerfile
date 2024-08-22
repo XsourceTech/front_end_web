@@ -1,8 +1,8 @@
 #CONTAINER INTEGRATION
-FROM node:16-alpine AS integration
+FROM node:18-alpine AS build-stage
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
 # Install app dependencies
 COPY package*.json .
@@ -11,46 +11,16 @@ RUN npm install
 
 COPY . .
 
-ARG NODE_ENV=INTEGRATION
-ENV NODE_ENV=${NODE_ENV}
+# Build the application
+RUN npm run build
 
-EXPOSE 80
+# Serve the built application with a lightweight web server
+FROM nginx:alpine
 
-# #copy to another container cause the first container has all of the unnecessary typescript source code that we don't need or want to use, we just want the things in the folder that we created
-# #CONTAINER QUALIFICATION
-# FROM node:16 AS qualification
+# Copy the build output from the previous stage to the NGINX html directory
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-# ARG NODE_ENV=QUALIFICATION
-# ENV NODE_ENV=${NODE_ENV}
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# WORKDIR /usr/src/app
-
-# COPY package*.json .
-
-# #the final container is going to be for production which includes only the necessary dependencies
-# RUN npm ci -- only=qualification  
-
-# COPY --from=integration /usr/src/app/dist ./dist
-
-# CMD ["node", "dist/index.js"]
-
-# EXPOSE 80
-
-# #CONTAINER PRODUCTION
-# FROM node:16 AS production
-
-# ARG NODE_ENV=PRODUCTION
-# ENV NODE_ENV=${NODE_ENV}
-
-# WORKDIR /usr/src/app
-
-# COPY package*.json .
-
-# #the final container is going to be for production which includes only the necessary dependencies
-# RUN npm ci -- only=production  
-
-# COPY --from=qualification /usr/src/app/dist ./dist
-
-# CMD ["node", "dist/index.js"]
-
-# EXPOSE 80
+EXPOSE 3000
+CMD ["nginx", "-g", "daemon off;"]
