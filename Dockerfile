@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Install app dependencies
 ARG ENVIRONMENT
-COPY .env.${ENVIRONMENT} .
+COPY .env.${ENVIRONMENT} .env
 
 COPY package*.json .
 
