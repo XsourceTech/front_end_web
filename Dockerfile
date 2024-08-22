@@ -5,7 +5,9 @@ FROM node:18-alpine AS build-stage
 WORKDIR /app
 
 # Install app dependencies
-# COPY .env .
+ARG ENVIRONMENT
+COPY .env.${ENVIRONMENT} .
+
 COPY package*.json .
 
 RUN npm install

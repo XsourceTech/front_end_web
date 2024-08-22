@@ -29,7 +29,9 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.ACR_LOGIN_SERVER }}/front_end_web:${{ secrets.IMAGE_TAG }} 
-          file: Dockerfile
+          file: Dockerfile 
+          build-args: |
+            ENVIRONMENT=${{ secrets.DEPLOY_ENVIRONMENT }}
 
   deploy-to-azure:
     name: Deploy to Azure Web App

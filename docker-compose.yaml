@@ -8,5 +8,5 @@ services:
     env_file:
       - .env
     ports:
-      - "127.0.0.1:3000:3000"
+      - "127.0.0.1:80:80"
     restart: always
