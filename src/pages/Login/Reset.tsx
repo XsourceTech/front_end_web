@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import logo from '../../assets/logo.png';
 import './connection.scss';
@@ -14,7 +14,7 @@ export default function Reset() {
 
     const verifySubmit = async() => {
         await axios
-            .post(`${config.apiUrl}/reset?signed_email=${token}&user_info_password=${password}`)
+            .post(`${config.apiUrl}/password-reset-request?token=${token}&new_password=${password}`)
             .then(() => {
                 toast.success('Loging in...');
             })

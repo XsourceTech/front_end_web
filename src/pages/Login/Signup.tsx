@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
-import DividerOr from '../../component/DividerOr';
+// import  * as FcIcons from "react-icons/fc";
 
 import config from '../../config';
-import  * as FcIcons from "react-icons/fc";
 import './connection.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -21,8 +20,8 @@ export default function Signup() {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [username, setUsername] = useState<string>("")
-    const [job, setJob] = useState<string>("")
-    const [reason, setReason] = useState<string>("")
+    const [useridentity, setUserIdenity] = useState<string>("")
+    const [source, setSource] = useState<string>("")
 
 
     const validatePassword = (password: string): boolean => {
@@ -38,9 +37,11 @@ export default function Signup() {
             toast.error("请检查的邮箱地址是否正确");
         } else if (!validatePassword(password)) {
             toast.error("密码比如至少含有1个大写字母, 1个小写字母, 1个特殊字符!");
+        } else if (!username) {
+            toast.error("请输入用户名");
         } else {
             await axios
-                .post(`${config.apiUrl}/signup?user_info_email=${email}&user_info_password=${password}`)
+                .post(`${config.apiUrl}/signup?email=${email}&password=${password}&username=${username}&source=${source}&user_identity=${useridentity}`)
                 .then(() => {
                     toast.success('正在注册');
                 })
@@ -57,12 +58,12 @@ export default function Signup() {
                     <img src={logo} alt="logo" className="middle_logo" />
                     <h3>{import.meta.env.VITE_REACT_APP_WELCOME_MESSAGE}</h3>
                 </div>
-                <Xbutton width="25rem" text="使用谷歌账号注册" startIcon={<FcIcons.FcGoogle />} outlined={true} onClick={() => {}} />
-                <DividerOr />
+                {/* <Xbutton width="25rem" text="使用谷歌账号注册" startIcon={<FcIcons.FcGoogle />} outlined={true} onClick={() => {}} /> */}
+                {/* <DividerOr /> */}
 
                 <InputField width='25rem' type='text' onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => {setUsername(e.target.value)}} label="昵称" />
-                <DropDown label="您的身份" items={JobList.jobs.flat()} width="25rem" helper_text="" onChange={(val) => setJob(val)} />
-                <DropDown label="为什么选择信源" items={JobList.jobs.flat()} width="25rem" helper_text="" onChange={(val) => setReason(val)} />
+                <DropDown label="您的身份" items={JobList.jobs.flat()} width="25rem" helper_text="" onChange={(val) => setUserIdenity(val)} />
+                <DropDown label="为什么选择信源" items={JobList.jobs.flat()} width="25rem" helper_text="" onChange={(val) => setSource(val)} />
 
                 <InputField width='25rem' type='text' onChange={(e) => {setEmail(e.target.value)}} label="邮箱" />
                 <InputField label="密码" type="password" width='25rem' onChange={(e) => {setPassword(e.target.value)}}/>
