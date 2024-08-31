@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 // import  * as FcIcons from "react-icons/fc";
-
 import config from '../../config';
 import './connection.scss';
 import { ToastContainer, toast } from 'react-toastify';
@@ -22,7 +21,6 @@ export default function Signup() {
     const [username, setUsername] = useState<string>("")
     const [useridentity, setUserIdenity] = useState<string>("")
     const [source, setSource] = useState<string>("")
-
 
     const validatePassword = (password: string): boolean => {
         const hasUppercase = /[A-Z]/.test(password);
@@ -58,6 +56,7 @@ export default function Signup() {
                     <img src={logo} alt="logo" className="middle_logo" />
                     <h3>{import.meta.env.VITE_REACT_APP_WELCOME_MESSAGE}</h3>
                 </div>
+
                 {/* <Xbutton width="25rem" text="使用谷歌账号注册" startIcon={<FcIcons.FcGoogle />} outlined={true} onClick={() => {}} /> */}
                 {/* <DividerOr /> */}
 

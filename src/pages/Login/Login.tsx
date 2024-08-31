@@ -67,7 +67,8 @@ export default function Login() {
                 </div>
                 {/* <Xbutton width="25rem" text="使用谷歌账号登录" startIcon={<FcIcons.FcGoogle />} outlined={true} onClick={() => {}} /> */}
                 {/* <DividerOr /> */}
-                <InputField width='25rem' type='text' onChange={(e) => {setEmail(e.target.value)}} label="邮箱" />
+
+              <InputField width='25rem' type='text' onChange={(e) => {setEmail(e.target.value)}} label="邮箱" />
                 <InputField label="密码" type="password" width='25rem' onChange={(e) => {setPassword(e.target.value)}} />
 
                 <Xbutton text="登录" outlined={false} width="25rem" onClick={loginSubmit} startIcon={<></>} />
