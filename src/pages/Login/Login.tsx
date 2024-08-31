@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
-import  * as FcIcons from "react-icons/fc";
+// import  * as FcIcons from "react-icons/fc";
 import './connection.scss';
 import Xbutton from "../../component/Xbutton"
 import InputField from '../../component/InputField';
-import DividerOr from '../../component/DividerOr';
 import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import config from '../../config';
@@ -39,7 +38,7 @@ export default function Login() {
             toast.error("请检查的邮箱地址是否正确");
         } else {
             await axios
-                .get(`${config.apiUrl}/password-reset-request?email=${email}`,
+                .post(`${config.apiUrl}/password-reset-request?email=${email}`,
                     {
                         headers: {
                             'Accept': 'application/json'
@@ -66,9 +65,10 @@ export default function Login() {
                     <img src={logo} alt="logo" className="middle_logo" />
                     <h3>{import.meta.env.VITE_REACT_APP_WELCOME_MESSAGE}</h3>
                 </div>
-                <Xbutton width="25rem" text="使用谷歌账号登录" startIcon={<FcIcons.FcGoogle />} outlined={true} onClick={() => {}} />
-                <DividerOr />
-                <InputField width='25rem' type='text' onChange={(e) => {setEmail(e.target.value)}} label="邮箱" />
+                {/* <Xbutton width="25rem" text="使用谷歌账号登录" startIcon={<FcIcons.FcGoogle />} outlined={true} onClick={() => {}} /> */}
+                {/* <DividerOr /> */}
+
+              <InputField width='25rem' type='text' onChange={(e) => {setEmail(e.target.value)}} label="邮箱" />
                 <InputField label="密码" type="password" width='25rem' onChange={(e) => {setPassword(e.target.value)}} />
 
                 <Xbutton text="登录" outlined={false} width="25rem" onClick={loginSubmit} startIcon={<></>} />
