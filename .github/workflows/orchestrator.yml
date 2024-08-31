@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - feat/devops_front
+      - main
 
 jobs:
   build-and-push:
