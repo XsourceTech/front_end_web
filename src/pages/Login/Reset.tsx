@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from '../../assets/logo.png';
 import './connection.scss';
@@ -9,14 +8,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import config from '../../config';
 
 export default function Reset() {
-    const navigate = useNavigate();
     const [token, setToken] = useState<string>('');
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
     const verifySubmit = async() => {
         await axios
-            .post(`${config.apiUrl}/reset?signed_email=${token}&user_info_password=${password}`)
+            .post(`${config.apiUrl}/password-reset-request?token=${token}&new_password=${password}`)
             .then(() => {
                 toast.success('Loging in...');
             })
