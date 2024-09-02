@@ -12,12 +12,10 @@ export default function Activate() {
     const [token, setToken] = useState<string>('');
 
     const activateSubmit = async() => {
-        console.log(`${config.apiUrl}/verify?signed_email=${token}`)
         await axios
-            .get(`${config.apiUrl}/verify`,
+            .get(`${config.apiUrl}/activate?token=${token}`,
                 {
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
                         'Accept': 'application/json'
                     }
                 }

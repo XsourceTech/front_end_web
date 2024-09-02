@@ -14,7 +14,10 @@ export default function Reset() {
 
     const verifySubmit = async() => {
         await axios
-            .post(`${config.apiUrl}/password-reset-request?token=${token}&new_password=${password}`)
+            .post(`${config.apiUrl}/password-reset`, {
+                token: token,
+                new_password: password
+            })
             .then(() => {
                 toast.success('Loging in...');
             })

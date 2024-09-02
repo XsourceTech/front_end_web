@@ -23,7 +23,10 @@ export default function Login() {
             toast.error("请检查的邮箱地址是否正确");
         } else {
             await axios
-                .post(`${config.apiUrl}/login?user_info_email=${email}&user_info_password=${password}`)
+                .post(`${config.apiUrl}/login`, {
+                    email: email,
+                    password: password
+                })
                 .then(() => {
                     toast.success('正在登录');
                 })
@@ -38,7 +41,9 @@ export default function Login() {
             toast.error("请检查的邮箱地址是否正确");
         } else {
             await axios
-                .post(`${config.apiUrl}/password-reset-request?email=${email}`,
+                .post(`${config.apiUrl}/password-reset-request`, {
+                    email: email
+                    },
                     {
                         headers: {
                             'Accept': 'application/json'
