@@ -17,6 +17,11 @@ export default function Reset() {
             .post(`${config.apiUrl}/password-reset`, {
                 token: token,
                 new_password: password
+            }, {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Accept': 'application/json'
+                }
             })
             .then(() => {
                 toast.success('Loging in...');

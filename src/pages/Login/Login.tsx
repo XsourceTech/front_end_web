@@ -43,13 +43,13 @@ export default function Login() {
             await axios
                 .post(`${config.apiUrl}/password-reset-request`, {
                     email: email
-                    },
-                    {
-                        headers: {
-                            'Accept': 'application/json'
-                        }
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': 'application/json'
                     }
-                )
+                })
                 .then(() => {
                     toast.success('注意查收您的邮件');
                 })
