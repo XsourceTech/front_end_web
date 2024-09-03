@@ -39,7 +39,18 @@ export default function Signup() {
             toast.error("请输入用户名");
         } else {
             await axios
-                .post(`${config.apiUrl}/signup?email=${email}&password=${password}&username=${username}&source=${source}&user_identity=${useridentity}`)
+                .post(`${config.apiUrl}/signup`, {
+                    email: email,
+                    user_name: username,  // Ensure this matches the server's expected field name
+                    password: password,
+                    source: source,
+                    user_identity: useridentity
+                }, {
+                    headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                    }
+                })
                 .then(() => {
                     toast.success('正在注册');
                 })
