@@ -24,7 +24,6 @@ export default function Xbutton({
     startIcon: any,
     outlined: boolean
 }) {
-    console.log(text, width)
 
     return (
         <>
