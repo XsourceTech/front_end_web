@@ -21,12 +21,12 @@ export default function Activate() {
                 }
             )
             .then(() => {
-                toast.success('Loging in...');
-                navigate("/userinfo", { state: { token } })
+                toast.success('Logging in...');
+                navigate("/login", { state: { token } })
             })
             .catch((e: any) => {
                 toast.error(String(e));
-                navigate("/userinfo", { state: { token } })
+                navigate("/login", { state: { token } })
             });
     }
 
