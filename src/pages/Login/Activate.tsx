@@ -12,9 +12,14 @@ export default function Activate() {
     const [token, setToken] = useState<string>('');
 
     const activateSubmit = async() => {
-        console.log(`${config.apiUrl}/verify?signed_email=${token}`)
         await axios
-            .get(`${config.apiUrl}/activate?token=000&_=${new Date().getTime()}`)
+            .get(`${config.apiUrl}/activate?token=${token}`,
+                {
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                }
+            )
             .then(() => {
                 toast.success('Logging in...');
                 // navigate("/login", { state: { token } })
