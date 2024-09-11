@@ -21,12 +21,12 @@ export default function Activate() {
                 }
             )
             .then(() => {
-                toast.success('Loging in...');
-                navigate("/userinfo", { state: { token } })
+                toast.success('Logging in...');
+                // navigate("/login", { state: { token } })
             })
             .catch((e: any) => {
                 toast.error(String(e));
-                navigate("/userinfo", { state: { token } })
+                // navigate("/login", { state: { token } })
             });
     }
 
@@ -52,8 +52,11 @@ export default function Activate() {
                     <h3>{import.meta.env.VITE_REACT_APP_WELCOME_MESSAGE}</h3>
                 </div>
                 <h1>点击按钮  完成注册流程</h1>
-                <Xbutton width="25rem" text="验证邮箱" startIcon={<></>} outlined={true} onClick={() => {activateSubmit()}} />
+                <Xbutton width="25rem" text="验证邮箱" startIcon={<></>} outlined={true} onClick={activateSubmit} />
+                <Xbutton text="重置" outlined={false} width="25rem" onClick={activateSubmit} startIcon={<></>} />
+
                 <ToastContainer />
+                <button onClick={activateSubmit} />
             </div>
         </div>
     );
