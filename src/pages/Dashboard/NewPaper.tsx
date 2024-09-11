@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import AccordionUsage from "../../component/Accordion";
-import Modal from 'react-modal';
+import { IoIosAdd } from "react-icons/io";
+import Xbutton from "../../component/Xbutton";
 
 export default function NewPaper({
     setItemSelected
@@ -24,8 +25,10 @@ export default function NewPaper({
 
     return (
         <div style={{padding: '1rem'}}>
-            <h1>我的论文</h1>
-            <button onClick={handleChatbotNavigation}>Add new paper</button>
+            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                <h1>我的论文</h1>
+                <Xbutton onClick={handleChatbotNavigation} width="10rem" text="New Paper" startIcon={<IoIosAdd/>} outlined={true} />
+            </div>
             <AccordionUsage title="Black holes" details={details}/>
         </div>
     )
