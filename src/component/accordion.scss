@@ -1,0 +1,13 @@
+.accordionRoot {
+    font-family: 'dong qing', sans-serif;
+    
+    .MuiAccordionSummary-root,
+    .MuiAccordionDetails-root,
+    .MuiAccordion-root {
+      font-family: inherit;
+    }
+
+    .MuiAccordionSummary-root {
+        font-weight: 800;
+    }
+}

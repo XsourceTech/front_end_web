@@ -1,0 +1,16 @@
+{
+    "menu": [
+        {
+            "text": "论文",
+            "key": "paper",
+            "icon": "LuNewspaper",
+            "library": "lu"
+        },
+        {
+            "text": "参考文件",
+            "key": "upload",
+            "icon": "MdUploadFile",
+            "library": "md"
+        }
+    ]
+}

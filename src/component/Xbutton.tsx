@@ -1,3 +1,4 @@
+import React from 'react';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 
@@ -23,7 +24,6 @@ export default function Xbutton({
     startIcon: any,
     outlined: boolean
 }) {
-    console.log(text, width)
 
     return (
         <>
