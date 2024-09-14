@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import './chatbot.scss'
 import { MessageLeft, MessageRight } from '../../component/Chat/MessageLeftRight';
@@ -12,45 +13,66 @@ interface Message {
     role: string;
 }
 
+interface TokenType {
+    access_token: string;
+    token_type: string
+}
+
 export default function ChatBotChatBot({ source }: { source?: string }) {
+    const navigate = useNavigate();
+    const token = localStorage.getItem('authToken');
     const [ summary, setSummary ] = useState<boolean>(false);
     const [ currentInput, setCurrentInput ] = useState<string>("");
-    const [ messages, setMessages ] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<{ chat_message: Message[] }>({ chat_message: [] });
     const messageEndRef = useRef<HTMLDivElement | null>(null);
-
 
     const clientAnswer = async () => {
         const tmpMessage = {
             "content": currentInput,
             "role": "user"
         }
-        setMessages((prevMessages) => [...prevMessages, tmpMessage]);
+        setMessages((prevMessages) => ({
+            chat_message: [...prevMessages.chat_message, tmpMessage],
+        }));
         await axios
-            .post(`${config.apiUrl}/reply_msg`, {
-                bot_memory: messages,
-                level: "major"
-            })
+            .get(`${config.apiUrl}/get-response?bot_memory=${messages}part=article&token=${token}`)
             .then((response) => {
-                // if response.flag setSummary(true)
+                console.log(response)
+                const chat_messages = response.data.bot_memory.chat_messages
+                const botRes = chat_messages[chat_messages.length - 1]
+                setMessages((prevMessages) => ({
+                    chat_message: [...prevMessages.chat_message, botRes],
+                }));
+                if (response.data.bot_memory.is_end) {
+                    setSummary(true)
+                }
             })
             .catch((e: any) => {
                console.log(String(e));
             });
-        const automaticMessage = {
-            "content": "Message from Ai for text",
-            "role": "admin"
-        }
-        setMessages((prevMessages) => [...prevMessages, automaticMessage]);
+        // const automaticMessage = {
+        //     "content": "Message from Ai for text",
+        //     "role": "assistant"
+        // }
+        // setMessages((prevMessages) => ({
+        //     chat_message: [...prevMessages.chat_message, automaticMessage],
+        // }));
     }
 
     const summarizeInfo = async () => {
         await axios
-            .post(`${config.apiUrl}/summarize_info`, {
-                bot_memory: messages
+            .post(`${config.apiUrl}/summarize`, {
+                bot_memory: messages,
+                token: token,
+                part: "article"
+            })
+            .then((response) => {
+                console.log(response)
+                navigate("/dashboard")
             })
             .catch((e: any) => {
                 console.log(String(e));
-             });
+            });
     }
 
     useEffect(() => {
@@ -65,8 +87,8 @@ export default function ChatBotChatBot({ source }: { source?: string }) {
             <Paper className="paper" elevation={0}>
                 <Paper className="messageBody" elevation={0}>
                     {
-                        messages.map((msg) => {
-                            if (msg.role === 'admin') {
+                        messages.chat_message.map((msg) => {
+                            if (msg.role === 'assistant') {
                                 return (
                                   <MessageLeft
                                     message={msg.content}

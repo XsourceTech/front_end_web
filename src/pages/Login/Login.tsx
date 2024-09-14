@@ -27,11 +27,14 @@ export default function Login() {
                     email: email,
                     password: password
                 })
-                .then(() => {
+                .then((response) => {
                     toast.success('正在登录');
+                    localStorage.setItem('authToken', response.data);
+                    navigate('/dashboard');
                 })
                 .catch((e: any) => {
                     toast.error(String(e));
+                    navigate('/dashboard');
                 });
         }
     }
