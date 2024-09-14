@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.svg';
 // import  * as FcIcons from "react-icons/fc";
 import './connection.scss';
 import Xbutton from "../../component/Xbutton"

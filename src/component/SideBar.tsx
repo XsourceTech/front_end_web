@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuList from '../assets/json/menu.json';
 import * as LuIcons from 'react-icons/lu';
 import * as MdIcons from 'react-icons/md';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.svg';
 
 const drawerWidth = 240;
 
@@ -43,8 +43,8 @@ const SideBar: React.FC<SideBarProps> = ({ onClick }) => {
         anchor="left"
       >
         <div style={{display: 'flex', 'flexDirection': 'row', alignItems: 'center', justifyContent: 'space-around'}}>
-            <h2>XSource</h2>
             <img alt="logo" src={logo} style={{width:'2.5rem', height: '2.5rem'}} />
+            <h2>XSource</h2>
         </div>
 
         <List>

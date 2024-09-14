@@ -1,7 +1,7 @@
 import React from "react";
 import "./Chat.scss"
 import Avatar from '@mui/material/Avatar';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.svg';
 
 export const MessageLeft = (props) => {
   const message = props.message ? props.message : "no message";
