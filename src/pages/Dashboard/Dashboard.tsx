@@ -25,7 +25,7 @@ export default function Dashboard() {
             }}>
                 {itemSelected === 'paper' && <NewPaper setItemSelected={setItemSelected} />}
                 {itemSelected === 'upload' && <UploadFiles />}
-                {itemSelected === 'chatbot' && <ChatBot source={location.state?.source} token={location.state?.token} />}
+                {itemSelected === 'chatbot' && <ChatBot source={location.state?.source} />}
             </div>
         </div>
     )
