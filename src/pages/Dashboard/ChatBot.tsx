@@ -18,12 +18,14 @@ interface TokenType {
     token_type: string
 }
 
-export default function ChatBotChatBot({ source }: { source?: string }) {
+export default function ChatBot({ source }: { source?: string }) {
     const navigate = useNavigate();
-    const token = localStorage.getItem('authToken');
+    const tokenString = localStorage.getItem('authToken');
+    const token = tokenString ? JSON.parse(tokenString) : null;
     const [ summary, setSummary ] = useState<boolean>(false);
     const [ currentInput, setCurrentInput ] = useState<string>("");
-    const [messages, setMessages] = useState<{ chat_message: Message[] }>({ chat_message: [] });
+    const [messages, setMessages] = useState<{ chat_messages: Message[] }>({ chat_messages: [] });
+    
     const messageEndRef = useRef<HTMLDivElement | null>(null);
 
     const clientAnswer = async () => {
@@ -32,18 +34,27 @@ export default function ChatBotChatBot({ source }: { source?: string }) {
             "role": "user"
         }
         setMessages((prevMessages) => ({
-            chat_message: [...prevMessages.chat_message, tmpMessage],
-        }));
+            chat_messages: [...prevMessages.chat_messages, tmpMessage],
+        }))
+        const updatedMessages = {
+            chat_messages: [...messages.chat_messages, tmpMessage]
+        };
+    
         await axios
-            .get(`${config.apiUrl}/get-response?bot_memory=${messages}part=article&token=${token}`)
+            .post(`${config.apiUrl}/get-response?part=article`, {
+                bot_memory: updatedMessages,
+                token: {
+                    access_token: token?.access_token,
+                    token_type: token?.token_type
+                }
+            })
             .then((response) => {
-                console.log(response)
                 const chat_messages = response.data.bot_memory.chat_messages
                 const botRes = chat_messages[chat_messages.length - 1]
                 setMessages((prevMessages) => ({
-                    chat_message: [...prevMessages.chat_message, botRes],
+                    chat_messages: [...prevMessages.chat_messages, botRes],
                 }));
-                if (response.data.bot_memory.is_end) {
+                if (response.data.is_end) {
                     setSummary(true)
                 }
             })
@@ -61,13 +72,14 @@ export default function ChatBotChatBot({ source }: { source?: string }) {
 
     const summarizeInfo = async () => {
         await axios
-            .post(`${config.apiUrl}/summarize`, {
+            .post(`${config.apiUrl}/summarize?part=article`, {
                 bot_memory: messages,
-                token: token,
-                part: "article"
+                token: {
+                    access_token: token?.access_token,
+                    token_type: token?.token_type
+                }
             })
-            .then((response) => {
-                console.log(response)
+            .then(() => {
                 navigate("/dashboard")
             })
             .catch((e: any) => {
@@ -87,18 +99,18 @@ export default function ChatBotChatBot({ source }: { source?: string }) {
             <Paper className="paper" elevation={0}>
                 <Paper className="messageBody" elevation={0}>
                     {
-                        messages.chat_message.map((msg) => {
+                        messages.chat_messages.map((msg) => {
                             if (msg.role === 'assistant') {
                                 return (
-                                  <MessageLeft
-                                    message={msg.content}
-                                  />
+                                    <MessageLeft
+                                        message={msg.content}
+                                    />
                                 );
                             } else {
                                 return (
-                                  <MessageRight
-                                    message={msg.content}
-                                  />
+                                    <MessageRight
+                                        message={msg.content}
+                                    />
                                 );
                             }
                         })

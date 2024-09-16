@@ -10,7 +10,7 @@ import './accordion.scss';
 type DetailAccordion = {
     title: string;
     major: string;
-    research_fields: string;
+    field: string;
     topic: string;
 }
 
@@ -36,7 +36,7 @@ export default function AccordionUsage({
             标题: {details.title}
         </AccordionDetails>
         <AccordionDetails>
-            研究领域: {details.research_fields}
+            研究领域: {details.field}
         </AccordionDetails>
         <AccordionDetails>
             专业: {details.major}

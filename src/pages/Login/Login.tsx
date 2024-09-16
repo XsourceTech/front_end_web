@@ -29,7 +29,7 @@ export default function Login() {
                 })
                 .then((response) => {
                     toast.success('正在登录');
-                    localStorage.setItem('authToken', response.data);
+                    localStorage.setItem('authToken', JSON.stringify(response.data));
                     navigate('/dashboard');
                 })
                 .catch((e: any) => {
