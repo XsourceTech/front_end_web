@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.svg';
 import './connection.scss';
 import Xbutton from "../../component/Xbutton"
 import InputField from '../../component/InputField';

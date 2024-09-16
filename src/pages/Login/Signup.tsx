@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/logo.svg';
 // import  * as FcIcons from "react-icons/fc";
 import config from '../../config';
 import './connection.scss';
@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Xbutton from "../../component/Xbutton"
 import InputField from '../../component/InputField';
 import JobList from '../../assets/json/job.json';
+import SourceList from '../../assets/json/source.json';
 import DropDown from '../../component/DropDown';
 import axios from 'axios';
 
@@ -72,8 +73,8 @@ export default function Signup() {
                 {/* <DividerOr /> */}
 
                 <InputField width='25rem' type='text' onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => {setUsername(e.target.value)}} label="昵称" />
-                <DropDown label="您的身份" items={JobList.jobs.flat()} width="25rem" helper_text="" onChange={(val) => setUserIdenity(val)} />
-                <DropDown label="为什么选择信源" items={JobList.jobs.flat()} width="25rem" helper_text="" onChange={(val) => setSource(val)} />
+                <DropDown label="职业" items={JobList.jobs.flat()} width="25rem" helper_text="" onChange={(val) => setUserIdenity(val)} />
+                <DropDown label="从什么渠道了解到XSource" items={SourceList.sources.flat()} width="25rem" helper_text="" onChange={(val) => setSource(val)} />
 
                 <InputField width='25rem' type='text' onChange={(e) => {setEmail(e.target.value)}} label="邮箱" />
                 <InputField label="密码" type="password" width='25rem' onChange={(e) => {setPassword(e.target.value)}}/>
