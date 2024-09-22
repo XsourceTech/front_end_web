@@ -41,7 +41,7 @@ export default function ChatBot({ source }: { source?: string }) {
         };
     
         await axios
-            .post(`${config.apiUrl}/get-response?part=article`, {
+            .post(`${config.apiUrl}/chatbot/get-response?part=article`, {
                 bot_memory: updatedMessages,
                 token: {
                     access_token: token?.access_token,
@@ -72,7 +72,7 @@ export default function ChatBot({ source }: { source?: string }) {
 
     const summarizeInfo = async () => {
         await axios
-            .post(`${config.apiUrl}/summarize?part=article`, {
+            .post(`${config.apiUrl}/chatbot/summarize?part=article`, {
                 bot_memory: messages,
                 token: {
                     access_token: token?.access_token,

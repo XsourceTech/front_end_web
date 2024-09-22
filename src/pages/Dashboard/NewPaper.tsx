@@ -32,7 +32,7 @@ export default function NewPaper({
     
     const fetchMessages = async () => {
         await axios
-            .get(`${config.apiUrl}/get-article?token=${accessToken}`, {
+            .get(`${config.apiUrl}/article/get-article?token=${accessToken}`, {
                 headers: {
                     'Accept': 'application/json'
                 }

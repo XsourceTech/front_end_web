@@ -40,7 +40,7 @@ export default function Signup() {
             toast.error("请输入用户名");
         } else {
             await axios
-                .post(`${config.apiUrl}/signup`, {
+                .post(`${config.apiUrl}/user/signup`, {
                     email: email,
                     user_name: username,  // Ensure this matches the server's expected field name
                     password: password,

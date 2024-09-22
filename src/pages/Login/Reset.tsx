@@ -27,7 +27,7 @@ export default function Reset() {
             toast.error("密码比如至少含有1个大写字母, 1个小写字母, 1个特殊字符!");
         } else {
             await axios
-                .post(`https://1cd4-176-151-34-190.ngrok-free.app/password-reset`, {
+                .post(`${config.apiUrl}/user/password-reset`, {
                     token: token,
                     new_password: password
                 }, {

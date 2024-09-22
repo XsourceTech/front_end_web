@@ -26,7 +26,7 @@ export default function Login() {
         } else {
             setError("")
             try {
-                const response = await axios.post(`${config.apiUrl}/login`, {
+                const response = await axios.post(`${config.apiUrl}/user/login`, {
                     email: email,
                     password: password,
                 });
@@ -55,7 +55,7 @@ export default function Login() {
             toast.error("请检查的邮箱地址是否正确");
         } else {
             await axios
-                .post(`${config.apiUrl}/password-reset-request`, {
+                .post(`${config.apiUrl}/user/password-reset-request`, {
                     email: email
                 },
                 {

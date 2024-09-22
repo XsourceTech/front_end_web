@@ -13,7 +13,7 @@ export default function Activate() {
 
     const activateSubmit = async() => {
         await axios
-            .get(`${config.apiUrl}/activate?token=${token}`,
+            .get(`${config.apiUrl}/user/activate?token=${token}`,
                 {
                     headers: {
                         'Accept': 'application/json'
