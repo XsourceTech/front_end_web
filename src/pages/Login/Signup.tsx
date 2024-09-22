@@ -48,15 +48,15 @@ export default function Signup() {
                     user_identity: useridentity
                 }, {
                     headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     }
                 })
                 .then(() => {
                     toast.success('正在注册');
                 })
                 .catch((e: any) => {
-                    toast.error(String(e));
+                    toast.error(String(e.response.data.detail));
                 });
         }
     }

@@ -34,9 +34,6 @@ export default function Activate() {
         // Get the pathname
         const pathname = window.location.pathname;
         setToken(pathname.split('/')[2])
-    
-        // Extract the token from the pathname
-        // Assuming the token is always after "/verify/"
         const tokenMatch = pathname.match(/\/verify\/(.+)/);
     
         if (tokenMatch && tokenMatch[1]) {
@@ -56,7 +53,6 @@ export default function Activate() {
                 <Xbutton text="重置" outlined={false} width="25rem" onClick={activateSubmit} startIcon={<></>} />
 
                 <ToastContainer />
-                <button onClick={activateSubmit} />
             </div>
         </div>
     );
