@@ -31,7 +31,7 @@ export default function AccordionUsage({
 
     const handleDelete = async() => {
         await axios
-            .get(`${config.apiUrl}/article/delete-article/${id}`, {
+            .delete(`${config.apiUrl}/article/delete-article/${id}`, {
                 headers: {
                     'Accept': 'application/json'
                 }
