@@ -5,6 +5,7 @@ import './global-variable.scss';
 import Login from './pages/Login/Login';
 import Signup from './pages/Login/Signup';
 import Activate from './pages/Login/Activate';
+import Redirect from './pages/Login/Redirect';
 import Reset from './pages/Login/Reset';
 import Dashboard from './pages/Dashboard/Dashboard';
 import ChatBot from './pages/Dashboard/ChatBot';
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/activate/:token" element={<Activate />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path='/chatbot' element={<ChatBot />} />
+                <Route path="/redirect/:redirect" element={<Redirect />} />
                 {/* <Route path="/userinfo" element={<UserInfo />} /> */}
                 {/* <Route path="*" element={<NotFound />} /> */}
             </Routes>

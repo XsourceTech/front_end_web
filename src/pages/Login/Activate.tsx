@@ -13,7 +13,7 @@ export default function Activate() {
 
     const activateSubmit = async() => {
         await axios
-            .get(`${config.apiUrl}/activate?token=${token}`,
+            .get(`${config.apiUrl}/user/activate?token=${token}`,
                 {
                     headers: {
                         'Accept': 'application/json'
@@ -34,9 +34,6 @@ export default function Activate() {
         // Get the pathname
         const pathname = window.location.pathname;
         setToken(pathname.split('/')[2])
-    
-        // Extract the token from the pathname
-        // Assuming the token is always after "/verify/"
         const tokenMatch = pathname.match(/\/verify\/(.+)/);
     
         if (tokenMatch && tokenMatch[1]) {
@@ -53,10 +50,8 @@ export default function Activate() {
                 </div>
                 <h1>点击按钮  完成注册流程</h1>
                 <Xbutton width="25rem" text="验证邮箱" startIcon={<></>} outlined={true} onClick={activateSubmit} />
-                <Xbutton text="重置" outlined={false} width="25rem" onClick={activateSubmit} startIcon={<></>} />
 
                 <ToastContainer />
-                <button onClick={activateSubmit} />
             </div>
         </div>
     );

@@ -9,35 +9,47 @@ import config from '../../config';
 
 export default function Reset() {
     const [token, setToken] = useState<string>('');
-    const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
+    const validatePassword = (password: string): boolean => {
+        const hasUppercase = /[A-Z]/.test(password);
+        const hasLowercase = /[a-z]/.test(password);
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    
+        return hasUppercase && hasLowercase && hasSpecialChar;
+    };
+
+
     const verifySubmit = async() => {
-        await axios
-            .post(`${config.apiUrl}/password-reset`, {
-                token: token,
-                new_password: password
-            }, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'Accept': 'application/json'
-                }
-            })
-            .then(() => {
-                toast.success('Loging in...');
-            })
-            .catch((e: any) => {
-                toast.error(String(e));
-            });
+        console.log(token)
+        console.log(password)
+        if (!validatePassword(password) || password.length < 6) {
+            toast.error("密码应至少有6个字符，含有1个大写字母, 1个小写字母, 1个特殊字符!");
+        } else {
+            await axios
+                .post(`${config.apiUrl}/user/password-reset`, {
+                    token: token,
+                    new_password: password
+                }, {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(() => {
+                    toast.success('Logging in...');
+                })
+                .catch((e: any) => {
+                    toast.error(String(e.response.data.detail));
+                });
+        }
     }
 
     useEffect(() => {
         // Get the pathname
         const pathname = window.location.pathname;
         setToken(pathname.split('/')[2])
-    
-        // Extract the token from the pathname
-        // Assuming the token is always after "/verify/"
+
         const tokenMatch = pathname.match(/\/reset\/(.+)/);
     
         if (tokenMatch && tokenMatch[1]) {
@@ -52,7 +64,6 @@ export default function Reset() {
                     <img src={logo} alt="logo" className="middle_logo" />
                     <h3>{import.meta.env.VITE_REACT_APP_WELCOME_MESSAGE}</h3>
                 </div>
-                <InputField width='25rem' type='text' onChange={(e) => {setEmail(e.target.value)}} label="Email" />
                 <InputField label="Password" type="password" width='25rem' onChange={(e) => {setPassword(e.target.value)}} />
 
                 <Xbutton text="Reset your password" outlined={false} width="25rem" onClick={verifySubmit} startIcon={<></>} />

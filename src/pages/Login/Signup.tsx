@@ -34,30 +34,43 @@ export default function Signup() {
     const signupSubmit = async () => {
         if (!EmailRegex.test(email)) {
             toast.error("请检查的邮箱地址是否正确");
-        } else if (!validatePassword(password)) {
-            toast.error("密码比如至少含有1个大写字母, 1个小写字母, 1个特殊字符!");
+        } else if (!validatePassword(password) || password.length < 6) {
+            toast.error("密码应至少有6个字符, 含有1个大写字母, 1个小写字母, 1个特殊字符!");
         } else if (!username) {
             toast.error("请输入用户名");
+        } else if (!source || !useridentity) {
+            toast.error("请填写所有信息")
         } else {
-            await axios
-                .post(`${config.apiUrl}/signup`, {
+            try {
+                const response = await axios.post(`${config.apiUrl}/user/signup`, {
                     email: email,
-                    user_name: username,  // Ensure this matches the server's expected field name
+                    user_name: username,
                     password: password,
                     source: source,
                     user_identity: useridentity
                 }, {
                     headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     }
                 })
-                .then(() => {
-                    toast.success('正在注册');
-                })
-                .catch((e: any) => {
-                    toast.error(String(e));
-                });
+                toast.success('正在注册，请注意查看邮箱');
+                setTimeout(() => {
+                    navigate('/login'); // Replace '/other-page' with your desired route
+                }, 3000);
+            } catch (e: any) {
+                if (e.response) {
+                    if (e.response.data?.detail) {
+                        toast.error(String(e.response.data.detail));
+                    } else {
+                        toast.error("未知错误，请稍后再试");
+                    }
+                } else if (e.request) {
+                    toast.error("无法连接到服务器，请检查您的网络连接");
+                } else {
+                    toast.error("请求失败，请稍后再试");
+                }
+            }
         }
     }
 
@@ -73,8 +86,8 @@ export default function Signup() {
                 {/* <DividerOr /> */}
 
                 <InputField width='25rem' type='text' onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => {setUsername(e.target.value)}} label="昵称" />
-                <DropDown label="职业" items={JobList.jobs.flat()} width="25rem" helper_text="" onChange={(val) => setUserIdenity(val)} />
-                <DropDown label="从什么渠道了解到XSource" items={SourceList.sources.flat()} width="25rem" helper_text="" onChange={(val) => setSource(val)} />
+                <DropDown label="职业(必填)" items={JobList.jobs.flat()} width="25rem" helper_text="" onChange={(val) => setUserIdenity(val)} />
+                <DropDown label="从什么渠道了解到XSource(必填)" items={SourceList.sources.flat()} width="25rem" helper_text="" onChange={(val) => setSource(val)} />
 
                 <InputField width='25rem' type='text' onChange={(e) => {setEmail(e.target.value)}} label="邮箱" />
                 <InputField label="密码" type="password" width='25rem' onChange={(e) => {setPassword(e.target.value)}}/>

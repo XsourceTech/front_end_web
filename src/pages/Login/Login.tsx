@@ -17,25 +17,39 @@ export default function Login() {
     const [isResetModalOpen, setIsResetModalOpen] = useState<boolean>(false);
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const [ error, setError ] = useState<string>('')
 
     const loginSubmit = async() => {
         if (!EmailRegex.test(email)) {
             toast.error("请检查的邮箱地址是否正确");
+            setError("请检查的邮箱地址是否正确")
+        } else if (!password) {
+            toast.error("密码不能为空");
+            setError("密码不能为空")
         } else {
-            await axios
-                .post(`${config.apiUrl}/login`, {
+            setError("")
+            try {
+                const response = await axios.post(`${config.apiUrl}/user/login`, {
                     email: email,
-                    password: password
-                })
-                .then((response) => {
-                    toast.success('正在登录');
-                    localStorage.setItem('authToken', response.data);
-                    navigate('/dashboard');
-                })
-                .catch((e: any) => {
-                    toast.error(String(e));
-                    navigate('/dashboard');
+                    password: password,
                 });
+    
+                toast.success('正在登录');
+                localStorage.setItem('authToken', JSON.stringify(response.data));
+                navigate('/dashboard');
+            } catch (e: any) {
+                if (e.response) {
+                    if (e.response.data?.detail) {
+                        toast.error(String(e.response.data.detail));
+                    } else {
+                        toast.error("未知错误，请稍后再试");
+                    }
+                } else if (e.request) {
+                    toast.error("无法连接到服务器，请检查您的网络连接");
+                } else {
+                    toast.error("请求失败，请稍后再试");
+                }
+            }
         }
     }
 
@@ -44,7 +58,7 @@ export default function Login() {
             toast.error("请检查的邮箱地址是否正确");
         } else {
             await axios
-                .post(`${config.apiUrl}/password-reset-request`, {
+                .post(`${config.apiUrl}/user/password-reset-request`, {
                     email: email
                 },
                 {
@@ -55,9 +69,10 @@ export default function Login() {
                 })
                 .then(() => {
                     toast.success('注意查收您的邮件');
+                    setIsResetModalOpen(false)
                 })
                 .catch((e: any) => {
-                    toast.error(String(e));
+                    toast.error(String(e.response.data.detail));
                 });
         }
     }
@@ -76,9 +91,9 @@ export default function Login() {
                 {/* <Xbutton width="25rem" text="使用谷歌账号登录" startIcon={<FcIcons.FcGoogle />} outlined={true} onClick={() => {}} /> */}
                 {/* <DividerOr /> */}
 
-              <InputField width='25rem' type='text' onChange={(e) => {setEmail(e.target.value)}} label="邮箱" />
+                <InputField width='25rem' type='text' onChange={(e) => {setEmail(e.target.value)}} label="邮箱" />
                 <InputField label="密码" type="password" width='25rem' onChange={(e) => {setPassword(e.target.value)}} />
-
+                <p style={{color: 'red'}}>{ error }</p>
                 <Xbutton text="登录" outlined={false} width="25rem" onClick={loginSubmit} startIcon={<></>} />
                 <Xbutton width="25rem" text='初来乍到。创建新账号' startIcon={<></>} outlined={true} onClick={() => {navigate('/signup')}} />
                 
