@@ -5,6 +5,7 @@ import './chatbot.scss'
 import { MessageLeft, MessageRight } from '../../component/Chat/MessageLeftRight';
 import ChatInput from '../../component/Chat/ChatInput';
 import Xbutton from '../../component/Xbutton';
+import { ToastContainer, toast } from 'react-toastify';
 import axios from 'axios';
 import config from '../../config';
 
@@ -24,7 +25,10 @@ export default function ChatBot({ source }: { source?: string }) {
     const token = tokenString ? JSON.parse(tokenString) : null;
     const [ summary, setSummary ] = useState<boolean>(false);
     const [ currentInput, setCurrentInput ] = useState<string>("");
-    const [messages, setMessages] = useState<{ chat_messages: Message[] }>({ chat_messages: [] });
+    const [messages, setMessages] = useState<{ chat_messages: Message[] }>({ chat_messages: [{
+        "content": "你好，我是你的Xsource论文写作助手。为了更好的帮助你，我需要问你四个问题。首先，请问你的所学专业是什么呢？",
+        "role": "assistant"
+    }] });
     
     const messageEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -80,7 +84,10 @@ export default function ChatBot({ source }: { source?: string }) {
                 }
             })
             .then(() => {
-                navigate("/dashboard")
+                toast.success('正在生成...');
+                setTimeout(() => {
+                    navigate('/dashboard'); // Replace '/other-page' with your desired route
+                }, 3000);
             })
             .catch((e: any) => {
                 console.log(String(e));
@@ -125,6 +132,7 @@ export default function ChatBot({ source }: { source?: string }) {
                     )
                 }
             </Paper>
+            <ToastContainer />
         </div>
     )
 }

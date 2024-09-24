@@ -54,10 +54,20 @@ export default function NewPaper({
         <div style={{padding: '1rem'}}>
             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
                 <h1>我的论文</h1>
-                <Xbutton onClick={handleChatbotNavigation} width="10rem" text="New Paper" startIcon={<IoIosAdd/>} outlined={true} />
+                {paperList.length > 0 ? 
+                <Xbutton onClick={handleChatbotNavigation} width="10rem" text="创建新论文" startIcon={<IoIosAdd/>} outlined={true} />
+                :
+                null
+                }
+            </div>
+            <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
+            {paperList.length == 0 ?
+            <Xbutton onClick={handleChatbotNavigation} width="20rem" text="创建新论文" startIcon={<IoIosAdd/>} outlined={true} />
+            : null
+            }
             </div>
             {paperList.map((paper) => (
-                <AccordionUsage title={paper.title} details={paper}/>
+                <AccordionUsage id={paper.id} title={paper.title} details={paper}/>
             ))}
         </div>
     )

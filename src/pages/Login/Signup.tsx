@@ -35,7 +35,7 @@ export default function Signup() {
         if (!EmailRegex.test(email)) {
             toast.error("请检查的邮箱地址是否正确");
         } else if (!validatePassword(password) || password.length < 6) {
-            toast.error("密码比如至少有6个字符, 含有1个大写字母, 1个小写字母, 1个特殊字符!");
+            toast.error("密码应至少有6个字符, 含有1个大写字母, 1个小写字母, 1个特殊字符!");
         } else if (!username) {
             toast.error("请输入用户名");
         } else if (!source || !useridentity) {
@@ -54,6 +54,10 @@ export default function Signup() {
                         'Accept': 'application/json'
                     }
                 })
+                toast.success('正在注册，请注意查看邮箱');
+                setTimeout(() => {
+                    navigate('/login'); // Replace '/other-page' with your desired route
+                }, 3000);
             } catch (e: any) {
                 if (e.response) {
                     if (e.response.data?.detail) {

@@ -23,8 +23,8 @@ export default function Reset() {
     const verifySubmit = async() => {
         console.log(token)
         console.log(password)
-        if (!validatePassword(password)) {
-            toast.error("密码比如至少含有1个大写字母, 1个小写字母, 1个特殊字符!");
+        if (!validatePassword(password) || password.length < 6) {
+            toast.error("密码应至少有6个字符，含有1个大写字母, 1个小写字母, 1个特殊字符!");
         } else {
             await axios
                 .post(`${config.apiUrl}/user/password-reset`, {

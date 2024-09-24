@@ -23,6 +23,9 @@ export default function Login() {
         if (!EmailRegex.test(email)) {
             toast.error("请检查的邮箱地址是否正确");
             setError("请检查的邮箱地址是否正确")
+        } else if (!password) {
+            toast.error("密码不能为空");
+            setError("密码不能为空")
         } else {
             setError("")
             try {
@@ -66,6 +69,7 @@ export default function Login() {
                 })
                 .then(() => {
                     toast.success('注意查收您的邮件');
+                    setIsResetModalOpen(false)
                 })
                 .catch((e: any) => {
                     toast.error(String(e.response.data.detail));

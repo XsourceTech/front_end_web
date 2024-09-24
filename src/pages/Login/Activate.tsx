@@ -50,7 +50,6 @@ export default function Activate() {
                 </div>
                 <h1>点击按钮  完成注册流程</h1>
                 <Xbutton width="25rem" text="验证邮箱" startIcon={<></>} outlined={true} onClick={activateSubmit} />
-                <Xbutton text="重置" outlined={false} width="25rem" onClick={activateSubmit} startIcon={<></>} />
 
                 <ToastContainer />
             </div>
