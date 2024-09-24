@@ -1,0 +1,29 @@
+.paper {
+    width: 80vw;
+    height: 80vh;
+    max-height: 700px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative
+}
+
+.messageBody {
+    width: 90%;
+    overflow-y: scroll;
+    height: calc(100% - 80px);
+    border: none;
+    margin: 0 10rem;
+    margin-bottom: 1.8rem;
+}
+
+@media screen and (max-width: 1100px) {
+    .paper {
+        width: 65vw;
+        height: 80vh;
+    }
+
+    .messageBody {
+        width: 100%;
+    }
+}

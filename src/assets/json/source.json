@@ -1,0 +1,54 @@
+{
+    "sources": [
+        [{
+            "id": 1,
+            "value": "navigator",
+            "text": "搜索引擎(如百度、谷歌)"
+        },
+        {
+            "id": 2,
+            "value": "recommandation",
+            "text": "他人推荐"
+        },
+        {
+            "id": 3,
+            "value": "xhs",
+            "text": "小红书"
+        },
+        {
+            "id": 4,
+            "value": "wechat",
+            "text": "微信公众号"
+        },
+        {
+            "id": 5,
+            "value": "zhihu",
+            "text": "知乎"
+        },
+        {
+            "id": 6,
+            "value": "others",
+            "text": "其他社交媒体(如微博、抖音、twitter、ins、豆瓣等)"
+        },
+        {
+            "id": 7,
+            "value": "education",
+            "text": "学校、在线教育平台或机构推荐"
+        },
+        {
+            "id": 8,
+            "value": "activities",
+            "text": "展会、论坛或比赛"
+        },
+        {
+            "id": 9,
+            "value": "email",
+            "text": "电子邮件营销"
+        },
+        {
+            "id": 10,
+            "value": "advertisement",
+            "text": "广告"
+        }]
+    ]
+}

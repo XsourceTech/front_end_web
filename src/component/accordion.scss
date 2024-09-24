@@ -1,0 +1,26 @@
+.accordionRoot {
+    font-family: 'dong qing', sans-serif;
+    
+    .MuiAccordionSummary-root,
+    .MuiAccordionDetails-root,
+    .MuiAccordion-root {
+      font-family: inherit;
+    }
+
+    .MuiAccordionSummary-root {
+        font-weight: 800;
+    }
+}
+
+.accordionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.deleteIcon {
+  cursor: pointer;
+  color: var(--red-alert);
+  font-size: 1.5rem; /* Adjust size as needed */
+}
